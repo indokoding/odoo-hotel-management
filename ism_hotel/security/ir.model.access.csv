@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ism_hotel.access_hotel_amenity,access_hotel_amenity,ism_hotel.model_hotel_amenity,base.group_user,1,1,1,1
+ism_hotel.access_hotel_amenities_group,access_hotel_amenities_group,ism_hotel.model_hotel_amenities_group,base.group_user,1,1,1,1
+ism_hotel.access_hotel_amenities_group_line,access_hotel_amenities_group_line,ism_hotel.model_hotel_amenities_group_line,base.group_user,1,1,1,1
+ism_hotel.access_hotel_room,access_hotel_room,ism_hotel.model_hotel_room,base.group_user,1,1,1,1

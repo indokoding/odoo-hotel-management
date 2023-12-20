@@ -1,0 +1,16 @@
+# Odoo
+*.pyc
+__pycache__/
+*.egg-info/
+*.egg
+*.bak
+*.swp
+*.swo
+*.~lock.*
+*.pyo
+*.orig
+*.rej
+*.py~
+*.DS_Store
+.idea/
+.vscode/
