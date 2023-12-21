@@ -18,4 +18,11 @@
         action="action_hotel_room_type"
         sequence="2"
     />
+
+    <menuitem id="menu_hotel_amenity"
+        parent="menu_hotel_root"
+        name="Amenities"
+        action="action_hotel_amenity"
+        sequence="3"
+    />
 </odoo>

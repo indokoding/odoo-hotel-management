@@ -4,4 +4,5 @@ class HotelAmenity(models.Model):
     _name = 'hotel.amenity'
     _description = 'Hotel Amenity'
     
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(string="Name", required=True, tracking=True)
+    description = fields.Text(string="Description", tracking=True)

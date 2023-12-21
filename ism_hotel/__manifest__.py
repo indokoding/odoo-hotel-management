@@ -13,6 +13,7 @@
     
     'views/room_views.xml',
     'views/product_views.xml',
+    'views/amenity_views.xml',
     'views/menu_views.xml',
   ],
   'installable': True,

@@ -1,9 +1,9 @@
 from odoo import models, fields, api, _
 
-class HotelAmenitiesGroupLine(models.Model):
-    _name = 'hotel.amenities.group.line'
+class ProductAmenityLine(models.Model):
+    _name = 'product.amenity.line'
     _description = 'Hotel Amenities Group Line'
     
-    hotel_amenities_group_id = fields.Many2one('hotel.amenities.group', string="Hotel Amenities Group", index=True)
+    product_id = fields.Many2one('product.template', string="Product", index=True)
     sequence = fields.Integer(string="Sequence")
     hotel_amenity_id = fields.Many2one('hotel.amenity', string="Hotel Amenity")
