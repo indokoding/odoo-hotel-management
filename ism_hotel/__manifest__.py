@@ -6,6 +6,7 @@
   'category': 'Sales',
   'author': 'Your Name',
   'website': 'https://www.example.com',
+  'license': 'LGPL-3',
   'depends': ["mail", "sale", "purchase", "account"],
   'sequence': 0,
   'data': [
