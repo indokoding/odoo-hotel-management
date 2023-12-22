@@ -6,4 +6,4 @@ class ProductAmenityLine(models.Model):
     
     product_id = fields.Many2one('product.template', string="Product", index=True)
     sequence = fields.Integer(string="Sequence")
-    hotel_amenity_id = fields.Many2one('hotel.amenity', string="Hotel Amenity")
+    amenity_id = fields.Many2one('hotel.amenity', string="Hotel Amenity")

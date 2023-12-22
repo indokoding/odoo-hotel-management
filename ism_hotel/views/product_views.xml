@@ -7,7 +7,6 @@
         <field name="arch" type="xml">
             <search string="Product">
                 <field name="name" string="Room Type"/>
-                <separator/>
                 <filter string="is Room" name="filter_is_room" domain="[('is_room', '=', True)]"/>
             </search>
         </field>
@@ -81,6 +80,29 @@
                     <field name="is_room"/>
                     <label for="is_room"/>
                 </span>
+            </xpath>
+            <xpath expr="//page[@name='purchase']" position="after">
+                <page string="Room Information" name="room_information" attrs="{'invisible': [('is_room','=',False)]}">
+                    <group>
+                        <group col="1">
+                            <field name="max_allowed_person"/>
+                        </group>
+                    </group>
+                    <field name="amenity_line_ids">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="amenity_id" string="Amenities"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Room List" name="room_information" attrs="{'invisible': [('is_room','=',False)]}">
+                    <field name="room_ids">
+                        <tree edit="False" create="False" delete="False">
+                            <field name="name" string="Room Number"/>
+                            <!-- <field name="status"/> -->
+                        </tree>
+                    </field>
+                </page>
             </xpath>
         </field>
     </record>
