@@ -10,6 +10,8 @@
   'depends': ["mail", "sale", "purchase", "account"],
   'sequence': 0,
   'data': [
+    'data/hotel_room_data.xml',
+    
     'security/ir.model.access.csv',
     
     'views/room_views.xml',
