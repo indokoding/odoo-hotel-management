@@ -5,24 +5,31 @@
         sequence="10"
     />
 
+    <menuitem id="menu_hotel_reservation"
+        parent="menu_hotel_root"
+        name="Dashboard"
+        action="action_hotel_dashboard"
+        sequence="1"
+    />
+
     <menuitem id="menu_hotel_room"
         parent="menu_hotel_root"
         name="Rooms"
         action="action_hotel_room"
-        sequence="1"
+        sequence="2"
     />
 
     <menuitem id="menu_hotel_room_type"
         parent="menu_hotel_root"
         name="Room Types"
         action="action_hotel_room_type"
-        sequence="2"
+        sequence="3"
     />
 
     <menuitem id="menu_hotel_amenity"
         parent="menu_hotel_root"
         name="Amenities"
         action="action_hotel_amenity"
-        sequence="3"
+        sequence="4"
     />
 </odoo>
