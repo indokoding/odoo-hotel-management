@@ -16,17 +16,47 @@
                 group_delete="false"
                 default_order="name"
                 records_draggable="false"
-                >
+            >
+                <field name="id"/>
                 <field name="name"/>
                 <field name="room_type"/>
+                <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
+                        <div t-attf-class="oe_kanban_card d-flex flex-column">
+                            <div class="o_dropdown_kanban dropdown">
+                                <a class="dropdown-toggle o-no-caret btn" role="button" data-bs-toggle="dropdown" data-bs-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu">
+                                    <a role="menuitem" class="dropdown-item">Set to Under Maintenance</a>
+                                </div>
+                            </div>
                             <div class="oe_kanban_content">
-                                <div class="oe_kanban_details">
-                                    <span class="oe_kanban_details_2">
-                                        <field name="name"/>
-                                    </span>
+                                <div class="oe_kanban_title">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                                <div class="oe_kanban_subtitle">
+                                    <field name="state" widget="badge" decoration-success="state == 'available'" decoration-warning="state in ['reserved', 'occupied']" decoration-danger="state == 'maintenance'"/>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_footer">
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <t t-if="record.state.raw_value == 'available'">
+                                            <button type="button" class="btn btn-info" name="action_hotel_reservation" string="Book" context="{'default_room_id': active_id}"/>
+                                            <button type="button" class="btn btn-outline-success" name="action_hotel_reservation" string="Check In" context="{'default_room_id': active_id}"/>
+                                        </t>
+                                        <t t-if="record.state.raw_value == 'reserved'">
+                                            <button type="button" class="btn btn-info" name="action_hotel_reservation" string="Check In" context="{'default_room_id': active_id}"/>
+                                        </t>
+                                        <t t-if="record.state.raw_value == 'occupied'">
+                                            <button type="button" class="btn btn-info" name="action_hotel_reservation" string="Check Out" context="{'default_room_id': active_id}"/>
+                                        </t>
+                                        <t t-if="record.state.raw_value == 'maintenance'">
+                                            <button type="button" class="btn btn-info" name="action_hotel_reservation" string="Set to available" context="{'default_room_id': active_id}"/>
+                                        </t>
+                                    </div>
                                 </div>
                             </div>
                         </div>
