@@ -7,6 +7,7 @@
             <tree>
                 <field name="name"/>
                 <field name="room_type"/>
+                <field name="state" widget="badge" decoration-success="state == 'available'" decoration-info="state == 'reserved'" decoration-warning="state == 'occupied'" decoration-danger="state == 'maintenance'"/>
             </tree>
         </field>
     </record>

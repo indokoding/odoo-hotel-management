@@ -5,5 +5,5 @@ class ProductTemplate(models.Model):
     
     is_room = fields.Boolean(string="Is room", help="Check if this product is a hotel's room type")
     max_allowed_person = fields.Integer(string="Max allowed person", default=1)
-    amenity_line_ids = fields.One2many('product.amenity.line', 'product_id', string="Amenities")
+    amenity_line_ids = fields.One2many('hotel.amenity.line', 'product_id', string="Amenities")
     room_ids = fields.One2many('hotel.room', 'room_type', string="Rooms")

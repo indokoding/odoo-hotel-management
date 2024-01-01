@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="hotel_book_history_view_tree" model="ir.ui.view">
+        <field name="name">hotel.book.history.view.tree</field>
+        <field name="model">hotel.book.history</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="room_ids"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hotel_book_history_view_form" model="ir.ui.view">
+        <field name="name">hotel.book.history.view.form</field>
+        <field name="model">hotel.book.history</field>
+        <field name="arch" type="xml">
+            <form string="Reservations">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="check_in"/>
+                        <field name="check_out"/>
+                        <field name="room_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="room_type"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hotel_book_history_view_search" model="ir.ui.view">
+        <field name="name">hotel.book.history.view.search</field>
+        <field name="model">hotel.book.history</field>
+        <field name="arch" type="xml">
+            <search string="Reservations">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="room_ids"/>
+                <field name="state"/>
+            </search>
+        </field>
+    </record>
+    
+    <record id="action_hotel_book_history" model="ir.actions.act_window">
+        <field name="name">Book History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.book.history</field>
+        <field name="search_view_id" ref="hotel_book_history_view_search"/>
+        <field name="context">{'search_default_filter_is_room': 1}</field>
+    </record>
+
+    <record id="action_hotel_book_history_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="hotel_book_history_view_tree"/>
+        <field name="act_window_id" ref="action_hotel_book_history"/>
+    </record>
+
+    <record id="action_hotel_book_history_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hotel_book_history_view_form"/>
+        <field name="act_window_id" ref="action_hotel_book_history"/>
+    </record>
+</odoo>

@@ -9,7 +9,7 @@
   'license': 'LGPL-3',
   'depends': [
     "mail", 
-    "sale", 
+    "sale",
     "purchase", 
     "account", 
     "website", 
@@ -17,15 +17,20 @@
   ],
   'sequence': 0,
   'data': [
+    'data/sequence.xml',
     'data/hotel_room_data.xml',
     
     'security/ir.model.access.csv',
     
+    'wizard/create_room_booking.xml',
+    
     'views/room_views.xml',
     'views/product_views.xml',
     'views/amenity_views.xml',
+    'views/book_history_views.xml',
     'views/dashboard_views.xml',
     'views/menu_views.xml',
+    
   ],
   'installable': True,
   'auto_install': False,

@@ -5,7 +5,7 @@
         sequence="10"
     />
 
-    <menuitem id="menu_hotel_reservation"
+    <menuitem id="menu_hotel_dashboard"
         parent="menu_hotel_root"
         name="Dashboard"
         action="action_hotel_dashboard"
@@ -31,5 +31,12 @@
         name="Amenities"
         action="action_hotel_amenity"
         sequence="4"
+    />
+
+    <menuitem id="menu_hotel_book_history"
+        parent="menu_hotel_root"
+        name="Book History"
+        action="action_hotel_book_history"
+        sequence="5"
     />
 </odoo>

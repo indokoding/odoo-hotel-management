@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data noupdate="1">
+    <data>
         <!--
         Resource: product.template
         -->
@@ -49,15 +49,15 @@
         <!-- 
         Resource: hotel.amenity.line
         -->
-        <record id="product_amenity_line_single_room_1" model="product.amenity.line">
+        <record id="product_amenity_line_single_room_1" model="hotel.amenity.line">
             <field name="product_id" ref="product_template_single_room"/>
             <field name="amenity_id" ref="hotel_amenity_one_bed"/>
         </record>
-        <record id="product_amenity_line_double_room_1" model="product.amenity.line">
+        <record id="product_amenity_line_double_room_1" model="hotel.amenity.line">
             <field name="product_id" ref="product_template_double_room"/>
             <field name="amenity_id" ref="hotel_amenity_two_beds"/>
         </record>
-        <record id="product_amenity_line_deluxe_room_1" model="product.amenity.line">
+        <record id="product_amenity_line_deluxe_room_1" model="hotel.amenity.line">
             <field name="product_id" ref="product_template_deluxe_room"/>
             <field name="amenity_id" ref="hotel_amenity_king_size_bed"/>
         </record>

@@ -1,4 +1,7 @@
 from . import product_template
 from . import hotel_amenity
-from . import product_amenity_line
+from . import hotel_amenity_line
 from . import hotel_room
+from . import hotel_book_history
+# from . import hotel_reservation
+# from . import hotel_reservation_line

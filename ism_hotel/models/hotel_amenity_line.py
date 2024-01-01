@@ -1,7 +1,7 @@
 from odoo import models, fields, api, _
 
-class ProductAmenityLine(models.Model):
-    _name = 'product.amenity.line'
+class HotelAmenityLine(models.Model):
+    _name = 'hotel.amenity.line'
     _description = 'Hotel Amenities Group Line'
     
     product_id = fields.Many2one('product.template', string="Product", index=True)
