@@ -25,6 +25,8 @@ class HotelBookHistory(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('hotel.booking.number') or _('New')
         result = super(HotelBookHistory, self).create(vals)
         
+        print("jfbviwbvwljdbvwobvswvbqodvubwobvrwobv")
+        
         sale_order = self._create_sale_order(result)
         result.sale_order_id = sale_order.id
         
@@ -32,7 +34,7 @@ class HotelBookHistory(models.Model):
         for room in result.room_ids:
             room.state = 'reserved'
             
-        return True
+        return result
     
     def _create_sale_order(self, result):
         order_lines = []

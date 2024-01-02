@@ -48,6 +48,9 @@ class CheckinRoomBooking(models.TransientModel):
         for room in self.room_ids:
             room.state = 'occupied'
             
+        # sale.order to confirm
+        room_booking.sale_order_id.action_confirm()
+            
         return {
             'name': _('Room Booking'),
             'view_mode': 'form',
