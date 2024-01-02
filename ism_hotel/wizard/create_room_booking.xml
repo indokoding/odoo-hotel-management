@@ -6,9 +6,13 @@
         <field name="arch" type="xml">
             <form string="Create Room Booking">
                 <group>
-                    <field name="partner_id"/>
-                    <field name="check_in"/>
-                    <field name="check_out"/>
+                    <group>
+                        <field name="check_in"/>
+                        <field name="partner_id" string="Customer"/>
+                    </group>
+                    <group>
+                        <field name="check_out"/>
+                    </group>
                     <field name="room_ids" domain="[('state', '=', 'available')]">
                         <tree string="Available Rooms" editable="false" create="false" delete="false">
                             <field name="name"/>
