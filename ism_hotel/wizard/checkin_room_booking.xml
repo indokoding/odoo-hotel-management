@@ -2,14 +2,22 @@
 <odoo>
     <record id="view_checkin_room_booking" model="ir.ui.view">
         <field name="name">checkin.room.booking</field>
-        <field name="model">hotel.book.history</field>
+        <field name="model">checkin.room.booking</field>
         <field name="arch" type="xml">
             <form string="Checkin Room Booking">
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
                 <group>
-                    <field name="name"/>
-                    <field name="partner_id"/>
-                    <field name="check_in"/>
-                    <field name="check_out"/>
+                    <group>
+                        <field name="check_in"/>
+                        <field name="partner_id"/>
+                    </group>
+                    <group>
+                        <field name="check_out"/>
+                    </group>
                     <field name="room_ids"/>
                 </group>
                 <footer>
@@ -21,8 +29,8 @@
     </record>
 
     <record id="checkin_room_booking_wizard_action" model="ir.actions.act_window">
-        <field name="name">Checkin Room Booking</field>
-        <field name="res_model">hotel.book.history</field>
+        <field name="name">Check-in Room</field>
+        <field name="res_model">checkin.room.booking</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_checkin_room_booking"/>
         <field name="target">new</field>
