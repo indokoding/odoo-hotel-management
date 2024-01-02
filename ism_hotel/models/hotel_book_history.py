@@ -8,6 +8,7 @@ class HotelBookHistory(models.Model):
     name = fields.Char(string="Name", required=True, copy=False, readonly=True)
     partner_id = fields.Many2one('res.partner', string="Customer", required=True)
     room_ids = fields.Many2many('hotel.room', string="Room", required=True)
+    history_line_ids = fields.One2many('hotel.book.history.line', 'book_history_id', string="History Line")
     check_in = fields.Date(string="Check In", required=True)
     check_out = fields.Date(string="Check Out", required=True)
     state = fields.Selection([
@@ -54,20 +55,17 @@ class HotelBookHistory(models.Model):
         })
         
         return result
-    
-    def create_room_booking(self):
-        self.ensure_one()
-        room_booking = self.env['hotel.book.history'].create({
-            'partner_id': self.partner_id.id,
-            'check_in': self.check_in,
-            'check_out': self.check_out,
-            'room_ids': self.room_ids
-        })
-        return {
-            'name': _('Room Booking'),
-            'view_mode': 'form',
-            'res_model': 'hotel.book.history',
-            'res_id': room_booking.id,
-            'type': 'ir.actions.act_window',
-            'target': 'current',
-        }
+        
+    def action_checkin(self):
+        for rec in self:
+            rec.room_booking_id.write({
+                'partner_id': rec.partner_id.id,
+                'check_in': rec.check_in,
+                'check_out': rec.check_out,
+                'room_ids': rec.room_ids,
+                'state': 'checkin',
+            })
+            rec.room_id.write({
+                'state': 'occupied',
+            })
+        return True
