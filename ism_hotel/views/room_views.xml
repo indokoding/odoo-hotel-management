@@ -27,6 +27,20 @@
         </field>
     </record>
 
+    <record id="view_hotel_room_search" model="ir.ui.view">
+        <field name="name">hotel.room.search</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="room_type"/>
+                <group>
+                    <filter string="Available Rooms Only" name="available_rooms" domain="[('state', '=', 'available')]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_hotel_room" model="ir.actions.act_window">
         <field name="name">Rooms</field>
         <field name="type">ir.actions.act_window</field>

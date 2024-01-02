@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_checkin_room_booking" model="ir.ui.view">
+        <field name="name">checkin.room.booking</field>
+        <field name="model">hotel.book.history</field>
+        <field name="arch" type="xml">
+            <form string="Checkin Room Booking">
+                <group>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="check_in"/>
+                    <field name="check_out"/>
+                    <field name="room_ids"/>
+                </group>
+                <footer>
+                    <button name="action_checkin" string="Checkin" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="checkin_room_booking_wizard_action" model="ir.actions.act_window">
+        <field name="name">Checkin Room Booking</field>
+        <field name="res_model">hotel.book.history</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_checkin_room_booking"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

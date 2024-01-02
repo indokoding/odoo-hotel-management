@@ -22,6 +22,7 @@
     
     'security/ir.model.access.csv',
     
+    'wizard/checkin_room_booking.xml',
     'wizard/create_room_booking.xml',
     
     'views/room_views.xml',

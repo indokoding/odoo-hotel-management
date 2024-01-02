@@ -45,10 +45,10 @@
                                     <div class="oe_kanban_bottom_left">
                                         <t t-if="record.state.raw_value == 'available'">
                                             <button type="action" class="btn btn-info" name="%(create_room_booking_wizard_action)d" string="Book"/>
-                                            <button type="button" class="btn btn-outline-success" name="action_hotel_reservation" string="Check In" context="{'default_room_id': active_id}"/>
+                                            <button type="action" class="btn btn-outline-success" name="%(checkin_room_booking_wizard_action)d" string="Check In" context="{'default_room_id': active_id}"/>
                                         </t>
                                         <t t-if="record.state.raw_value == 'reserved'">
-                                            <button type="button" class="btn btn-info" name="action_hotel_reservation" string="Check In" context="{'default_room_id': active_id}"/>
+                                            <button type="action" class="btn btn-info" name="%(checkin_room_booking_wizard_action)d" string="Check In" context="{'default_room_id': active_id}"/>
                                         </t>
                                         <t t-if="record.state.raw_value == 'occupied'">
                                             <button type="button" class="btn btn-info" name="action_hotel_reservation" string="Check Out" context="{'default_room_id': active_id}"/>

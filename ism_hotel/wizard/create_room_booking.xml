@@ -2,22 +2,22 @@
 <odoo>
     <record id="create_room_booking_wizard" model="ir.ui.view">
         <field name="name">create.room</field>
-        <field name="model">hotel.book.history</field>
+        <field name="model">create.room.booking.wizard</field>
         <field name="arch" type="xml">
             <form string="Create Room Booking">
                 <group>
                     <field name="partner_id"/>
                     <field name="check_in"/>
                     <field name="check_out"/>
-                    <field name="room_ids">
-                        <tree editable="false" create="false" delete="false">
+                    <field name="room_ids" domain="[('state', '=', 'available')]">
+                        <tree string="Available Rooms" editable="false" create="false" delete="false">
                             <field name="name"/>
                             <field name="room_type"/>
                         </tree>
                     </field>
                 </group>
                 <footer>
-                    <button string="Create" class="btn-primary" special="save"/>
+                    <button string="Create" class="btn-primary" name="action_create_room_booking" type="object"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
@@ -26,7 +26,7 @@
 
     <record id="create_room_booking_wizard_action" model="ir.actions.act_window">
         <field name="name">Book Room</field>
-        <field name="res_model">hotel.book.history</field>
+        <field name="res_model">create.room.booking.wizard</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="create_room_booking_wizard"/>
         <field name="target">new</field>
