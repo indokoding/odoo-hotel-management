@@ -18,7 +18,12 @@
                     <group>
                         <field name="check_out"/>
                     </group>
-                    <field name="room_ids"/>
+                    <field name="room_ids" domain="[('state', '=', 'available')]">
+                        <tree string="Available Rooms" editable="false" create="false" delete="false">
+                            <field name="name"/>
+                            <field name="room_type"/>
+                        </tree>
+                    </field>
                 </group>
                 <footer>
                     <button name="action_checkin" string="Checkin" type="object" class="oe_highlight"/>
