@@ -1,4 +1,5 @@
 from odoo import api, fields, models, _
+
 import datetime
 class CreateRoomBookingWizard(models.TransientModel):
     _name = "create.room.booking.wizard"
@@ -13,6 +14,7 @@ class CreateRoomBookingWizard(models.TransientModel):
     partner_id = fields.Many2one('res.partner', string="Partner", required=True)
     check_in = fields.Date(string="Check In", required=True)
     check_out = fields.Date(string="Check Out", required=True)
+    duration = fields.Integer(string="Duration", compute='_compute_duration')
     room_ids = fields.Many2many('hotel.room', string="Room", required=True, default=default_get_room)
     
     def action_create_room_booking(self):
@@ -43,3 +45,11 @@ class CreateRoomBookingWizard(models.TransientModel):
         if self.check_out:
             if not self.check_in or (self.check_in and self.check_out < self.check_in):
                 self.check_in = self.check_out - datetime.timedelta(days=1)
+                
+    @api.depends('check_in', 'check_out')
+    def _compute_duration(self):
+        for record in self:
+            if record.check_in and record.check_out:
+                record.duration = (record.check_out - record.check_in).days
+            else:
+                record.duration = 0

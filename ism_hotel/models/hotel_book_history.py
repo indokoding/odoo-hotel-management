@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.http import request
+from odoo.exceptions import ValidationError
 
 class HotelBookHistory(models.Model):
     _name = 'hotel.book.history'
@@ -11,6 +11,7 @@ class HotelBookHistory(models.Model):
     history_line_ids = fields.One2many('hotel.book.history.line', 'book_history_id', string="History Line")
     check_in = fields.Date(string="Check In", required=True)
     check_out = fields.Date(string="Check Out", required=True)
+    duration = fields.Integer(string="Duration", compute='_compute_duration')
     sale_order_id = fields.Many2one('sale.order', string="Sale Order")
     has_sale_order = fields.Boolean(string="Has Sale Order", compute='_compute_has_sale_order')
     state = fields.Selection([
@@ -19,14 +20,26 @@ class HotelBookHistory(models.Model):
         ('checked_out', 'Checked Out'),
         ('cancelled', 'Cancelled'),
     ], string="State", default='booked', required=True)
-    
+
     @api.depends('sale_order_id')
     def _compute_has_sale_order(self):
         for record in self:
             record.has_sale_order = record.sale_order_id and True or False
+            
+    @api.depends('check_in', 'check_out')
+    def _compute_duration(self):
+        for record in self:
+            if record.check_in and record.check_out:
+                record.duration = (record.check_out - record.check_in).days
+            else:
+                record.duration = 0
     
     @api.model
     def create(self, vals):
+        if vals.get('check_in') and vals.get('check_out'):
+            if vals.get('check_in') > vals.get('check_out'):
+                raise ValidationError(_("Check In date must be less than Check Out date"))
+        
         if vals.get('name', _('New')) == _('New'):
             vals['name'] = self.env['ir.sequence'].next_by_code('hotel.booking.number') or _('New')
         result = super(HotelBookHistory, self).create(vals)
@@ -39,6 +52,25 @@ class HotelBookHistory(models.Model):
             room.state = 'reserved'
             
         return result
+    
+    def action_checkin(self):
+        for record in self:
+            record.state = 'checked_in'
+            
+            # change state of room
+            for room in record.room_ids:
+                room.state = 'occupied'
+                
+            # sale.order to confirm
+            record.sale_order_id.action_confirm()
+            
+    def action_checkout(self):
+        for record in self:
+            record.state = 'checked_out'
+            
+            # change state of room
+            for room in record.room_ids:
+                room.state = 'available'
     
     def action_cancel(self):
         for record in self:

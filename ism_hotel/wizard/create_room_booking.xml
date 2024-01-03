@@ -7,11 +7,12 @@
             <form string="Create Room Booking">
                 <group>
                     <group>
-                        <field name="check_in"/>
+                        <field name="check_in" options="{'datepicker': {'format': 'dd-MM-yyyy'}}"/>
                         <field name="partner_id" string="Customer"/>
                     </group>
                     <group>
                         <field name="check_out"/>
+                        <field name="duration" readonly="1" string="Duration (Days)"/>
                     </group>
                     <field name="room_ids" domain="[('state', '=', 'available')]">
                         <tree string="Available Rooms" editable="false" create="false" delete="false">
