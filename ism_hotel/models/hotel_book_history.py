@@ -124,3 +124,14 @@ class HotelBookHistory(models.Model):
             'order_line': order_lines,
         })
         
+    def action_view_sale_order(self):
+        self.ensure_one()
+        return {
+            'name': _('Sale Order'),
+            'view_mode': 'form',
+            'res_model': 'sale.order',
+            'res_id': self.sale_order_id.id,
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
+        
