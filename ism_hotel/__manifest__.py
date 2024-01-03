@@ -11,9 +11,7 @@
     "mail", 
     "sale",
     "purchase", 
-    "account", 
-    "website", 
-    "website_sale"
+    "account"
   ],
   'sequence': 0,
   'data': [
