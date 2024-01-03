@@ -12,6 +12,7 @@ class HotelBookHistory(models.Model):
     check_in = fields.Date(string="Check In", required=True)
     check_out = fields.Date(string="Check Out", required=True)
     sale_order_id = fields.Many2one('sale.order', string="Sale Order")
+    has_sale_order = fields.Boolean(string="Has Sale Order", compute='_compute_has_sale_order')
     state = fields.Selection([
         ('booked', 'Booked'),
         ('checked_in', 'Checked In'),
@@ -19,13 +20,16 @@ class HotelBookHistory(models.Model):
         ('cancelled', 'Cancelled'),
     ], string="State", default='booked', required=True)
     
+    @api.depends('sale_order_id')
+    def _compute_has_sale_order(self):
+        for record in self:
+            record.has_sale_order = record.sale_order_id and True or False
+    
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
             vals['name'] = self.env['ir.sequence'].next_by_code('hotel.booking.number') or _('New')
         result = super(HotelBookHistory, self).create(vals)
-        
-        print("jfbviwbvwljdbvwobvswvbqodvubwobvrwobv")
         
         sale_order = self._create_sale_order(result)
         result.sale_order_id = sale_order.id
@@ -35,6 +39,17 @@ class HotelBookHistory(models.Model):
             room.state = 'reserved'
             
         return result
+    
+    def action_cancel(self):
+        for record in self:
+            record.state = 'cancelled'
+            
+            # change state of room
+            for room in record.room_ids:
+                room.state = 'available'
+                
+            # cancel sale order
+            record.sale_order_id.action_cancel()
     
     def _create_sale_order(self, result):
         order_lines = []

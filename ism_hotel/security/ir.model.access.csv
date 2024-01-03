@@ -6,3 +6,4 @@ ism_hotel.access_hotel_book_history,access_hotel_book_history,ism_hotel.model_ho
 ism_hotel.access_create_room_booking_wizard,access_create_room_booking_wizard,ism_hotel.model_create_room_booking_wizard,base.group_user,1,1,1,1
 ism_hotel.access_hotel_book_history_line,access_hotel_book_history_line,ism_hotel.model_hotel_book_history_line,base.group_user,1,1,1,1
 ism_hotel.access_checkin_room_booking,access_checkin_room_booking,ism_hotel.model_checkin_room_booking,base.group_user,1,1,1,1
+ism_hotel.access_checkout_room_booking,access_checkout_room_booking,ism_hotel.model_checkout_room_booking,base.group_user,1,1,1,1

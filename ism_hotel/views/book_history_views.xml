@@ -20,7 +20,15 @@
         <field name="model">hotel.book.history</field>
         <field name="arch" type="xml">
             <form string="Reservations">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="booked,checked_in,checked_out" on_change="1" modifiers="{'readonly': true}"/>
+                </header>
                 <sheet>
+                    <!-- <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_view_source_sale_orders" type="button" icon="fa-pencil-square-o" modifiers="{'invisible': [('state', '!=', 'booked')]}">
+                            <span class="oe_stat_text">Sale Order</span>
+                        </button>
+                    </div> -->
                     <div class="oe_title">
                         <h1>
                             <field name="name"/>

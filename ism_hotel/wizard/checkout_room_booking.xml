@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_checkout_room_booking" model="ir.ui.view">
+        <field name="name">checkout.room.booking</field>
+        <field name="model">checkout.room.booking</field>
+        <field name="arch" type="xml">
+            <form string="Checkout Room Booking">
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="check_in"/>
+                        <field name="partner_id"/>
+                    </group>
+                    <group>
+                        <field name="check_out"/>
+                    </group>
+                    <field name="room_ids"/>
+                </group>
+                <footer>
+                    <button name="action_checkout" string="Checkout" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="checkout_room_booking_wizard_action" model="ir.actions.act_window">
+        <field name="name">Check-out Room</field>
+        <field name="res_model">checkout.room.booking</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_checkout_room_booking"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
