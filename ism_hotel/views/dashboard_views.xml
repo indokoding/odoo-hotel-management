@@ -35,7 +35,7 @@
                                         <a role="menuitem" class="dropdown-item" type="object" name="action_maintenance">Set to Maintenance</a>
                                     </t>
                                     <t t-if="record.state.raw_value == 'occupied'">
-                                        <a role="menuitem" class="dropdown-item" type="object" name="open_checkout_form">Set to Maintenance</a>
+                                        <a role="menuitem" class="dropdown-item" type="object" name="open_checkout_form" context="{'default_room_id': active_id}">Check Out</a>
                                     </t>
                                     <t t-if="record.state.raw_value == 'maintenance'">
                                         <a role="menuitem" class="dropdown-item" type="object" name="action_available">Set to Available</a>

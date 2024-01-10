@@ -1,4 +1,5 @@
 from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 class HotelRoom(models.Model):
     _name = 'hotel.room'
@@ -88,6 +89,26 @@ class HotelRoom(models.Model):
                     'state': 'checked_in'
                 }
             }
+            
+    def open_checkout_form(self):
+        booking_id = self._search_currently_occupied_rooms()
+        print('booking_id', booking_id)
+        if booking_id:
+            return {
+                'name': _('Check Out'),
+                'view_mode': 'form',
+                'res_model': 'hotel.book.history',
+                'res_id': booking_id.id,
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'context': {
+                    'active_id': booking_id.id
+                },
+                
+            }
+        else:
+            raise UserError(_("There is no room currently occupied."))
+            
         
     def _search_nearest_booked_rooms(self):
         room_id = self._context.get('active_id')
@@ -101,13 +122,12 @@ class HotelRoom(models.Model):
         return room_booking
     
     def _search_currently_occupied_rooms(self):
-        room_id = self._context.get('active_id')
+        room_id = self._context.get('default_room_id')
         # look for the first room booking that is available or reserved
+        print('room_id', room_id)
         room_booking = self.env['hotel.book.history'].search([
-            ('room_ids', 'in', room_id.id),
-            ('state', '=', 'checked_in'),
-            ('check_in', '<=', fields.Date.today()),
-            ('check_out', '>=', fields.Date.today())
+            ('room_ids', 'in', room_id),
+            ('state', '=', 'checked_in')
         ], limit=1)
         return room_booking
         
