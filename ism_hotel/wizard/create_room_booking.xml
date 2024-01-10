@@ -7,7 +7,7 @@
             <form string="Create Room Booking">
                 <group>
                     <group>
-                        <field name="check_in" options="{'datepicker': {'format': 'dd-MM-yyyy'}}"/>
+                        <field name="check_in"/>
                         <field name="partner_id" string="Customer"/>
                     </group>
                     <group>

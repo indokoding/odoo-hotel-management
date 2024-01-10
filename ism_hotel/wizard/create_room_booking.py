@@ -1,4 +1,5 @@
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 import datetime
 class CreateRoomBookingWizard(models.TransientModel):
@@ -8,7 +9,6 @@ class CreateRoomBookingWizard(models.TransientModel):
     @api.model
     def default_get_room(self):
         room_id = self.env['hotel.room'].browse(self._context.get('active_id'))
-        print(room_id)
         return room_id    
 
     partner_id = fields.Many2one('res.partner', string="Partner", required=True)
@@ -36,15 +36,13 @@ class CreateRoomBookingWizard(models.TransientModel):
         
     @api.onchange('check_in')
     def onchange_check_in(self):
-        if self.check_in:
-            if not self.check_out or (self.check_out and self.check_out < self.check_in):
-                self.check_out = self.check_in + datetime.timedelta(days=1)
+        self._auto_assign_check_out()
+        self._check_availability()
                 
     @api.onchange('check_out')
     def onchange_check_out(self):
-        if self.check_out:
-            if not self.check_in or (self.check_in and self.check_out < self.check_in):
-                self.check_in = self.check_out - datetime.timedelta(days=1)
+        self._auto_assign_check_in()
+        self._check_availability()
                 
     @api.depends('check_in', 'check_out')
     def _compute_duration(self):
@@ -53,3 +51,30 @@ class CreateRoomBookingWizard(models.TransientModel):
                 record.duration = (record.check_out - record.check_in).days
             else:
                 record.duration = 0
+                
+    def _auto_assign_check_in(self):
+        if self.check_out:
+            if not self.check_in or (self.check_in and self.check_out < self.check_in):
+                self.check_in = self.check_out - datetime.timedelta(days=1)
+                
+    def _auto_assign_check_out(self):
+        if self.check_in:
+            if not self.check_out or (self.check_out and self.check_out < self.check_in):
+                self.check_out = self.check_in + datetime.timedelta(days=1)
+                
+    def _check_availability(self):
+        self.ensure_one()
+        # room_booking = self.env['hotel.book.history'].search([('room_ids', 'in', self.room_ids.id), ('state', '=', 'booked'), ('check_in', '<=', self.check_in), ('check_out', '>=', self.check_out)], limit=1)
+        # print( bool(room_booking) )
+        # if room_booking:
+        #     raise ValidationError(_('Room is not available for the selected dates.'))
+        # else:
+        #     return True
+        room_id 
+        
+        print( self.room_ids.id )
+        room_booking = self.env['hotel.book.history'].search([('room_ids', 'in', self.room_ids.id), ('state', '=', 'booked')], limit=1)
+        print( room_booking.state )
+        
+        
+    

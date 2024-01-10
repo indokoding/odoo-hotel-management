@@ -8,10 +8,11 @@
   'website': 'https://www.example.com',
   'license': 'LGPL-3',
   'depends': [
+    "base",
     "mail", 
     "sale",
     "purchase", 
-    "account"
+    "account",
   ],
   'sequence': 0,
   'data': [
@@ -30,8 +31,8 @@
     'views/book_history_views.xml',
     'views/dashboard_views.xml',
     'views/menu_views.xml',
-    
   ],
+  'assets': {},
   'installable': True,
   'auto_install': False,
   'application': True,

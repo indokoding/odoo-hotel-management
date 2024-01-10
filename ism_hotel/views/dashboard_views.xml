@@ -29,7 +29,17 @@
                                     <span class="fa fa-ellipsis-v"/>
                                 </a>
                                 <div class="dropdown-menu" role="menu">
-                                    <a role="menuitem" class="dropdown-item">Set to Under Maintenance</a>
+                                    <t t-if="record.state.raw_value == 'available'">
+                                        <a role="menuitem" class="dropdown-item" type="object" name="open_booking_form">Book</a>
+                                        <hr class="dropdown-divider"/>
+                                        <a role="menuitem" class="dropdown-item" type="object" name="action_maintenance">Set to Maintenance</a>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'occupied'">
+                                        <a role="menuitem" class="dropdown-item" type="object" name="open_checkout_form">Set to Maintenance</a>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'maintenance'">
+                                        <a role="menuitem" class="dropdown-item" type="object" name="action_available">Set to Available</a>
+                                    </t>
                                 </div>
                             </div>
                             <div class="oe_kanban_content">
@@ -43,7 +53,7 @@
                             <div class="oe_kanban_footer">
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left">
-                                        <t t-if="record.state.raw_value == 'available'">
+                                        <!-- <t t-if="record.state.raw_value == 'available'">
                                             <button type="action" class="btn btn-info" name="%(create_room_booking_wizard_action)d" string="Book"/>
                                             <button type="action" class="btn btn-outline-success" name="%(checkin_room_booking_wizard_action)d" string="Check In" context="{'default_room_id': active_id}"/>
                                         </t>
@@ -55,7 +65,7 @@
                                         </t>
                                         <t t-if="record.state.raw_value == 'maintenance'">
                                             <button type="button" class="btn btn-info" name="action_hotel_reservation" string="Set to available" context="{'default_room_id': active_id}"/>
-                                        </t>
+                                        </t> -->
                                     </div>
                                 </div>
                             </div>
