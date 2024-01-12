@@ -81,8 +81,8 @@ class HotelBookHistory(models.Model):
             record.state = 'booked'
             
             # change state of room
-            for room in record.room_ids:
-                room.state = 'reserved'
+            # for room in record.room_ids:
+            #     room.state = 'reserved'
     
     def action_checkin(self):
         for record in self:
@@ -121,6 +121,7 @@ class HotelBookHistory(models.Model):
         room_type_dict_qty = {}
         room_type_dict_str_join = {}
         
+        # get all selected room, then count and group by room type
         for room in result.room_ids:
             if room.room_type.name not in room_type_dict_qty:
                 room_types.append(room.room_type)
@@ -137,6 +138,7 @@ class HotelBookHistory(models.Model):
             else:
                 room_type_dict_str_join[room_type.name] = room_type_dict_str_join[room_type.name][0]
                 
+        # create order lines and notes below for each type of room
         for room_type in room_types:
             order_lines.append((0, 0, {
                 'product_template_id': room_type.id,
@@ -168,13 +170,17 @@ class HotelBookHistory(models.Model):
                 
     def _check_availability(self):
         pass
-        # self.ensure_one()
-        # room_booking = self.env['hotel.book.history'].search([('room_ids', 'in', self.room_ids.id), ('state', '=', 'booked'), ('check_in', '<=', self.check_in), ('check_out', '>=', self.check_out)], limit=1)
-        # print( bool(room_booking) )
-        # if room_booking:
-        #     raise ValidationError(_('Room is not available for the selected dates.'))
-        # else:
-        #     return True
+        self.ensure_one()
+        room_booking = self.env['hotel.book.history'].search([
+            ('room_ids', 'in', self.room_ids.id), 
+            ('state', '=', 'booked'), 
+            ('check_in', '<=', self.check_in), 
+            ('check_out', '>=', self.check_out)
+        ], limit=1)
+        if room_booking:
+            raise ValidationError(_('Room is not available for the selected dates.'))
+        else:
+            return True
         
     def action_view_sale_order(self):
         self.ensure_one()
