@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 import datetime
 
@@ -47,6 +47,11 @@ class HotelBookHistory(models.Model):
         if vals.get('check_in') and vals.get('check_out'):
             if vals.get('check_in') > vals.get('check_out'):
                 raise ValidationError(_("Check In date must be less than Check Out date"))
+            
+        # if user doesn't select any room gives error raise
+        
+        if len(vals.get('room_ids')[0][2]) == 0:
+            raise ValidationError(_("Please select room(s)"))
         
         vals['state'] = 'booked'
         if vals.get('name', _('New')) == _('New'):
@@ -146,6 +151,7 @@ class HotelBookHistory(models.Model):
                 'name': room_type.name,
                 'product_uom_qty': room_type_dict_qty[room_type.name],
                 'price_unit': room_type.list_price,
+                'duration': result.duration,
             }))
             order_lines.append((0, 0, {
                 'display_type': 'line_note',
@@ -171,16 +177,16 @@ class HotelBookHistory(models.Model):
     def _check_availability(self):
         pass
         self.ensure_one()
-        room_booking = self.env['hotel.book.history'].search([
-            ('room_ids', 'in', self.room_ids.id), 
-            ('state', '=', 'booked'), 
-            ('check_in', '<=', self.check_in), 
-            ('check_out', '>=', self.check_out)
-        ], limit=1)
-        if room_booking:
-            raise ValidationError(_('Room is not available for the selected dates.'))
-        else:
-            return True
+        selected_room_ids = self.room_ids
+        for room in selected_room_ids:
+            is_book_exist = self.env['hotel.book.history'].search([
+                ('room_ids', '=', room.id),
+                ('check_in', '<=', self.check_in),
+                ('check_out', '>=', self.check_in),
+                ('state', 'in', ['booked', 'checked_in']),
+            ])
+            if is_book_exist:
+                raise ValidationError(_("Room %s is not available on %s") % (room.name, self.check_in))
         
     def action_view_sale_order(self):
         self.ensure_one()

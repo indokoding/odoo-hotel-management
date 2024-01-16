@@ -24,7 +24,7 @@
                     <button name="action_book" type="object" class="oe_highlight" string="Book Now" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                     <button name="action_checkout" type="object" class="oe_highlight" string="Check Out" attrs="{'invisible': [('state', '!=', 'checked_in')]}"/>
                     <button name="action_checkin" type="object" class="oe_highlight" string="Check In" attrs="{'invisible': [('state', '!=', 'booked')]}"/>
-                    <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': [('state', 'in', ['draft', 'checked_in', 'checked_out'])]}"/>
+                    <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': [('state', 'in', ['draft', 'checked_in', 'checked_out', 'cancelled'])]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="booked,checked_in,checked_out" on_change="1" modifiers="{'readonly': true}"/>
                 </header>
                 <sheet>
@@ -45,14 +45,14 @@
                     </div>
                     <group>
                         <group>
-                            <field name="check_in"/>
-                            <field name="partner_id" string="Customer"/>
+                            <field name="check_in" attrs="{'readonly': [('state', 'in', ['booked', 'checked_in', 'checked_out'])]}"/>
+                            <field name="partner_id" string="Customer" attrs="{'readonly': [('state', 'in', ['booked', 'checked_in', 'checked_out'])]}"/>
                         </group>
                         <group>
-                            <field name="check_out"/>
+                            <field name="check_out" attrs="{'readonly': [('state', 'in', ['booked', 'checked_in', 'checked_out'])]}"/>
                             <field name="duration" readonly="1" string="Duration (Days)"/>
                         </group>
-                        <field name="room_ids" domain="[('state', '=', 'available')]">
+                        <field name="room_ids" domain="[('state', '=', 'available')]" attrs="{'readonly': [('state', 'in', ['booked', 'checked_in', 'checked_out'])]}">
                             <tree string="Available Rooms" editable="false" create="false" delete="false">
                                 <field name="name"/>
                                 <field name="room_type"/>

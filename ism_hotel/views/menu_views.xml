@@ -7,7 +7,7 @@
 
     <menuitem id="menu_hotel_dashboard"
         parent="menu_hotel_root"
-        name="Dashboard"
+        name="Reservations"
         action="action_hotel_dashboard"
         sequence="1"
     />

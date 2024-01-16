@@ -30,6 +30,8 @@
     'views/amenity_views.xml',
     'views/book_history_views.xml',
     'views/dashboard_views.xml',
+    'views/sale_order_views.xml',
+    
     'views/menu_views.xml',
   ],
   'assets': {},
