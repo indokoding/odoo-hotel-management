@@ -87,11 +87,38 @@
         <field name="model">hotel.room</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_maintenance" type="object" class="btn btn-outline-danger" string="Set to Maintenance" attrs="{'invisible': [('state', '!=', 'available')]}"/>
+                    <button name="action_available" type="object" class="btn btn-outline-success" string="Set to Available" attrs="{'invisible': [('state', '!=', 'maintenance')]}"/>
+                </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_view_reservations"
+                                class="oe_stat_button"
+                                icon="fa-money"
+                                type="object"
+                                string="Bookings">
+                            <field name="booking_count" widget="statinfo" string="Bookings"/>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="room_type"/>
+                        <field name="state" invisible="1"/>
                     </group>
+                    <!-- <notebook>
+                        <page name="room_bookings" string="Room Bookings">
+                            <field name="booking_ids">
+                                <tree string="Room Bookings" editable="false" create="false" delete="false" default_order="check_in desc">
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="check_in"/>
+                                    <field name="check_out"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook> -->
                 </sheet>
             </form>
         </field>

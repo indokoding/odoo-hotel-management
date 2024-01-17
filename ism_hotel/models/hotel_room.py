@@ -23,6 +23,18 @@ class HotelRoom(models.Model):
         ('maintenance', 'Maintenance'),
         ('unavailable', 'Unavailable'),
     ], string="State", default='available', store=True)
+    booking_ids = fields.Many2many('hotel.book.history', string="Booking History")
+    booking_count = fields.Integer(string="Booking Count", compute="_compute_booking_count", store=False)
+    
+    def _compute_booking_count(self):
+        for record in self:
+            record.booking_count = len(record.booking_ids)
+            
+    def action_view_reservations(self):
+        self.ensure_one()
+        action = self.env.ref('ism_hotel.action_hotel_book_history_all').read()[0]
+        action['domain'] = [('room_ids', 'in', self.id)]
+        return action
     
     def action_maintenance(self):
         self.ensure_one()
