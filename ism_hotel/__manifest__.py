@@ -32,6 +32,8 @@
     'views/dashboard_views.xml',
     'views/sale_order_views.xml',
     
+    'report/ir_actions_report_templates.xml',
+    
     'views/menu_views.xml',
   ],
   'assets': {},
