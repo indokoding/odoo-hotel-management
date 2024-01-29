@@ -10,22 +10,22 @@ You can find the Odoo installation instructions from [here](https://www.odoo.com
 ## Installation
 
 1. Clone this repository.
-```
-> git clone https://github.com/indokoding/odoo-hotel-management.git
+```bash
+git clone https://github.com/indokoding/odoo-hotel-management.git
 ```
 
 2. Run the server using run command.
 <details>
     <summary>Linux & MacOS</summary>
 
-        > cd /CommunityPath
-        > python3 odoo-bin --addons-path=addons,/customAddonsPath -d mydb
+        cd /CommunityPath
+        python3 odoo-bin --addons-path=addons,/customAddonsPath -d mydb
 </details>
 <details>
     <summary>Windows</summary>
     
-        > cd CommunityPath/
-        > python odoo-bin -r dbuser -w dbpassword --addons-path=addons,customAddonsPath -d mydb
+        cd CommunityPath/
+        python odoo-bin -r dbuser -w dbpassword --addons-path=addons,customAddonsPath -d mydb
 </details>
 
 Alternatively you can add the addons path to the Odoo configuration file before running the server.
