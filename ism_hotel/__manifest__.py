@@ -1,10 +1,10 @@
 {
   'name': 'Hotel Management System',
   'version': '1.0.1',
-  'summary': 'Manage rental products in the sales module',
-  'description': 'This module allows you to manage rental products within the sales module of Odoo.',
+  'summary': 'Manage rooms, reservations, and sales',
+  'description': 'This module allows you to manage hotel rooms, reservations, and sales in the "Hotel Management" module.',
   'category': 'Sales',
-  'author': 'Your Name',
+  'author': 'Indokoding',
   'website': 'https://www.example.com',
   'license': 'LGPL-3',
   'depends': [
@@ -20,10 +20,6 @@
     'data/hotel_room_data.xml',
     
     'security/ir.model.access.csv',
-    
-    'wizard/checkout_room_booking.xml',
-    'wizard/checkin_room_booking.xml',
-    'wizard/create_room_booking.xml',
     
     'views/room_views.xml',
     'views/product_views.xml',
