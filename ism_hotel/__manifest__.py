@@ -4,8 +4,8 @@
   'summary': 'Manage rooms, reservations, and sales',
   'description': 'This module allows you to manage hotel rooms, reservations, and sales in the "Hotel Management" module.',
   'category': 'Sales',
-  'author': 'Indokoding',
-  'website': 'https://www.example.com',
+  'author': 'Indokoding Sukses Makmur',
+  'website': 'https://www.indokoding.com',
   'license': 'LGPL-3',
   'depends': [
     "base",
