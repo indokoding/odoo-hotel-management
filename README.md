@@ -4,8 +4,8 @@ This addon provides a hotel management system for Odoo.
 
 ## Requirements
 
-- Odoo 16.0 Community Edition
-You can find the Odoo installation instructions from [here](https://www.odoo.com/documentation/16.0/administration/install/source.html).
+- Odoo 16.0 Community Edition. 
+* You can find the Odoo installation instructions from [here](https://www.odoo.com/documentation/16.0/administration/install/source.html).
 
 ## Installation
 
