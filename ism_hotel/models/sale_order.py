@@ -16,7 +16,7 @@ class SaleOrder(models.Model):
             
     def action_view_hotel_book_history(self):
         self.ensure_one()
-        action = self.env.ref('ism_hotel.action_hotel_book_history').read()[0]
+        action = self.env.ref('ism_hotel.action_hotel_book_history_all').read()[0]
         action['domain'] = [('sale_order_id', '=', self.id)]
         return action
 

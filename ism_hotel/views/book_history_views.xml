@@ -117,7 +117,6 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hotel.book.history</field>
         <field name="search_view_id" ref="hotel_book_history_view_search"/>
-        <field name="context">{'search_default_filter_checked_out': 0}</field>
     </record>
 
     <record id="action_hotel_book_history_view_all_tree" model="ir.actions.act_window.view">

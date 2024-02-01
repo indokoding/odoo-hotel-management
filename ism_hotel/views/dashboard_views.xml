@@ -26,8 +26,8 @@
                 <field name="room_ids"/>
                 <field name="state"/>
 
-                <filter name="filter_checked_out" string="Checked Out" domain="[('state', '=', 'check_out')]"/>
-                <filter name="filter_checked_in" string="Checked In" domain="[('state', '=', 'check_in')]"/>
+                <filter name="filter_checked_out" string="Checked Out" domain="[('state', '=', 'checked_out')]"/>
+                <filter name="filter_checked_in" string="Checked In" domain="[('state', '=', 'checked_in')]"/>
                 <filter name="filter_booked" string="Currently Booked" domain="[('state', '=', 'booked')]"/>
                 
                 <group>
