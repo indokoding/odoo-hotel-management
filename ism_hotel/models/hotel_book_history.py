@@ -6,6 +6,7 @@ import datetime
 class HotelBookHistory(models.Model):
     _name = 'hotel.book.history'
     _description = 'Hotel Book History'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     
     @api.model
     def default_get_room(self):
@@ -27,7 +28,7 @@ class HotelBookHistory(models.Model):
         ('checked_in', 'Checked In'),
         ('checked_out', 'Checked Out'),
         ('cancelled', 'Cancelled'),
-    ], string="State", default='draft', required=True)
+    ], string="State", default='draft', required=True, tracking=True)
 
     @api.depends('sale_order_id')
     def _compute_has_sale_order(self):

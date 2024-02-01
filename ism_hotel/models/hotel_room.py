@@ -3,6 +3,7 @@ from odoo.exceptions import UserError
 
 class HotelRoom(models.Model):
     _name = 'hotel.room'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Hotel Room'
     
     # TODO: add a new field called 'status' with the following options:
