@@ -27,6 +27,7 @@
     'views/book_history_views.xml',
     'views/dashboard_views.xml',
     'views/sale_order_views.xml',
+    'views/account_move_views.xml',
     
     'report/ir_actions_report_templates.xml',
     
