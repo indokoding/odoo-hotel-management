@@ -59,10 +59,4 @@ class SaleOrder(models.Model):
             tax_totals = tax_model._prepare_tax_totals(tax_base_line_dicts, currency_to_use)
             order.tax_totals = tax_totals
 
-            # for line in order_lines:
-            #     fields_dict = {}
-            #     for key in line.fields_get():
-            #         fields_dict[key] = line[key]
-            #     print('fields_dict : ', fields_dict)
-        
         return res

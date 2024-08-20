@@ -1,6 +1,6 @@
 {
   'name': 'Hotel Management System',
-  'version': '1.0.1',
+  'version': '1.0.2',
   'summary': 'Manage rooms, reservations, and sales',
   'description': 'This module allows you to manage hotel rooms, reservations, and sales in the "Hotel Management" module.',
   'category': 'Sales',
@@ -10,7 +10,8 @@
   'depends': [
     "base",
     "mail", 
-    "sale",
+    "sale_management",
+    # "sale",
     "purchase", 
     "account",
   ],
@@ -34,10 +35,10 @@
     'views/menu_views.xml',
   ],
   'assets': {},
-  'installable': True,
-  'auto_install': False,
-  'application': True,
-  'images': [
-    'static/description/banner.png',
-  ]
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+    'images': [
+        'static/description/icon.png',
+    ],
 }

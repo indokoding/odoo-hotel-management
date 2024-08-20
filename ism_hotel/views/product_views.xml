@@ -17,9 +17,10 @@
         <field name="model">product.template</field>
         <field name="arch" type="xml">
             <tree string="Room Types" sample="1">
-                <field name="sale_ok" invisible="1"/>
+                <!-- <field name="sale_ok" invisible="1" hide=""/> -->
                 <field name="name" string="Room Type"/>
-                <field name="list_price" string="Price" widget='monetary' options="{'currency_field': 'currency_id'}" optional="show" decoration-muted="not sale_ok"/>
+                <field name="list_price" string="Price" widget='monetary' options="{'currency_field': 'currency_id'}" optional="show"/> 
+                <!-- decoration-muted="not sale_ok" -->
                 <field name="standard_price" widget='monetary' options="{'currency_field': 'cost_currency_id'}" optional="show" readonly="1"/>
             </tree>
         </field>
@@ -34,7 +35,6 @@
                 <field name="product_variant_count"/>
                 <field name="currency_id"/>
                 <field name="activity_state"/>
-                <!-- <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/> -->
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_card oe_kanban_global_click">
@@ -60,7 +60,7 @@
                                     Price: <field name="list_price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"></field>
                                 </div>
                                 <div name="hotel_room_available_count" class="mt-1">
-                                    X Rooms Available
+                                    <!-- X Rooms Available -->
                                 </div>
                             </div>
                         </div>
@@ -77,12 +77,12 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@name='options']" position="inside">
                 <span class="d-inline-block">
-                    <field name="is_room"/>
+                    <field name="is_room" id="is_room"/>
                     <label for="is_room"/>
                 </span>
             </xpath>
             <xpath expr="//page[@name='purchase']" position="after">
-                <page string="Room Information" name="room_information" attrs="{'invisible': [('is_room','=',False)]}">
+                <page string="Room Information" name="room_information" modifiers="{'invisible': [('is_room','=',False)]}">
                     <group>
                         <group col="1">
                             <field name="max_allowed_person"/>
@@ -95,7 +95,7 @@
                         </tree>
                     </field>
                 </page>
-                <page string="Room List" name="room_information" attrs="{'invisible': [('is_room','=',False)]}">
+                <page string="Room List" name="room_information" modifiers="{'invisible': [('is_room','=',False)]}">
                     <field name="room_ids">
                         <tree edit="False" create="False" delete="False">
                             <field name="name" string="Room Number"/>
@@ -122,14 +122,14 @@
     </record>
 
     <record id="action_hotel_room_type_view_tree" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
+        <field name="sequence" eval="2"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="hotel_room_type_view_tree"/>
         <field name="act_window_id" ref="action_hotel_room_type"/>
     </record>
 
     <record id="action_hotel_room_type_view_kanban" model="ir.actions.act_window.view">
-        <field name="sequence" eval="2"/>
+        <field name="sequence" eval="1"/>
         <field name="view_mode">kanban</field>
         <field name="view_id" ref="hotel_room_type_view_kanban"/>
         <field name="act_window_id" ref="action_hotel_room_type"/>
