@@ -39,6 +39,6 @@
     'auto_install': False,
     'application': True,
     'images': [
-        'static/description/icon.png',
+        'static/description/banner.png',
     ],
 }
